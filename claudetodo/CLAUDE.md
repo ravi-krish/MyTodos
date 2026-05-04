@@ -2,7 +2,7 @@
 -ClaudeTodo is a simple web apps to for ToDo Notes
 
 **Tech Stack**  
-- Backend: Python 3.10+, FASTAPI, in-memory list storage (no database yet)
+- Backend: Python 3.10+, FastAPI, SQLAlchemy 2.0 ORM, Azure SQL Server (pyodbc + ODBC Driver 18)
 - Frontend: React 18 with Vite, plain CSS, functional components only
 
 **Code Style**  
