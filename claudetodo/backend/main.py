@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import Optional
+from typing import Literal, Optional
 
 app = FastAPI(title="ClaudeTodo API")
 
@@ -23,7 +23,11 @@ def health() -> dict:
 
 
 @app.get("/todos")
-def get_todos() -> list[dict]:
+def get_todos(status: Literal["pending", "completed", "all"] = "all") -> list[dict]:
+    if status == "pending":
+        return [t for t in todos if not t["completed"]]
+    if status == "completed":
+        return [t for t in todos if t["completed"]]
     return todos
 
 
