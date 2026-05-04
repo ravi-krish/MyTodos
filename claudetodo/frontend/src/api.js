@@ -1,7 +1,8 @@
 const BASE = '/todos';
 
-export async function getTodos() {
-  const res = await fetch(BASE);
+export async function getTodos(status = 'all') {
+  const url = status === 'all' ? BASE : `${BASE}?status=${status}`;
+  const res = await fetch(url);
   if (!res.ok) throw new Error('Failed to fetch todos');
   return res.json();
 }

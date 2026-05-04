@@ -25,13 +25,16 @@ function TodoItem({ todo, onToggle, onDelete }) {
   );
 }
 
+const FILTERS = ['all', 'pending', 'completed'];
+
 function App() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [filter, setFilter] = useState('all');
 
-  const refresh = () => getTodos().then(setTodos);
+  const refresh = (f = filter) => getTodos(f).then(setTodos);
 
-  useEffect(() => { refresh(); }, []);
+  useEffect(() => { refresh(filter); }, [filter]);
 
   const handleAdd = async () => {
     const title = inputValue.trim();
@@ -68,6 +71,17 @@ function App() {
           onKeyDown={handleKeyDown}
         />
         <button className="add-btn" onClick={handleAdd}>Add</button>
+      </div>
+      <div className="filter-tabs">
+        {FILTERS.map((f) => (
+          <button
+            key={f}
+            className={`filter-tab${filter === f ? ' active' : ''}`}
+            onClick={() => setFilter(f)}
+          >
+            {f.charAt(0).toUpperCase() + f.slice(1)}
+          </button>
+        ))}
       </div>
       {todos.length === 0 ? (
         <p className="empty-msg">No todos yet. Add one above!</p>
