@@ -1,0 +1,69 @@
+# ── Python ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env/
+
+# ── Environment & Secrets ────────────────────────────
+.env
+.env.*
+*.env
+secrets.yaml
+secrets.yml
+config/local_*.yaml
+config/local_*.yml
+
+# ── dbt ─────────────────────────────────────────────
+target/
+dbt_packages/
+logs/
+.dbt/
+
+# ── Jupyter ──────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── SQL / Data files ─────────────────────────────────
+*.csv
+*.tsv
+*.parquet
+*.xlsx
+*.xls
+
+# ── macOS ────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ── VS Code ──────────────────────────────────────────
+.vscode/
+*.code-workspace
+
+# ── Logs & temp ──────────────────────────────────────
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# ── Azure / Cloud credentials ────────────────────────
+.azure/
+*.pfx
+*.pem
+*.key
+.DS_Store
