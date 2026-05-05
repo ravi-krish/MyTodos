@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getTodos, createTodo, updateTodo, deleteTodo } from './api';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import './App.css';
 
 function TodoItem({ todo, onToggle, onDelete }) {
@@ -27,7 +30,8 @@ function TodoItem({ todo, onToggle, onDelete }) {
 
 const FILTERS = ['all', 'pending', 'completed'];
 
-function App() {
+function TodoApp() {
+  const { logout } = useAuth();
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [filter, setFilter] = useState('all');
@@ -60,7 +64,10 @@ function App() {
 
   return (
     <div className="app">
-      <h1>ClaudeTodo</h1>
+      <div className="app-header">
+        <h1>ClaudeTodo</h1>
+        <button className="logout-btn" onClick={logout}>Logout</button>
+      </div>
       <div className="add-row">
         <input
           className="todo-input"
@@ -98,6 +105,27 @@ function App() {
         </ul>
       )}
     </div>
+  );
+}
+
+function AppRoutes() {
+  const { isAuthenticated } = useAuth();
+  const [showRegister, setShowRegister] = useState(false);
+
+  if (!isAuthenticated) {
+    return showRegister
+      ? <Register onSwitch={() => setShowRegister(false)} />
+      : <Login onSwitch={() => setShowRegister(true)} />;
+  }
+
+  return <TodoApp />;
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
   );
 }
 
