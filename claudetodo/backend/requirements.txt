@@ -4,3 +4,6 @@ sqlalchemy>=2.0
 pyodbc
 pytest
 httpx
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt<4.1
